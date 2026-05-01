@@ -8,8 +8,9 @@ app.secret_key = "forest_secret_key"  # フラッシュメッセージに必要
 
 # --- Gmail送信設定 ---
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 587
-app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_USE_TLS"] = False
+app.config["MAIL_USE_SSL"] = True
 app.config["MAIL_USERNAME"] = "atoz.arita@gmail.com"
 app.config["MAIL_PASSWORD"] = "fjgn kkht uoyv muaf"  # 16桁のアプリパスワード
 app.config["MAIL_DEFAULT_SENDER"] = "atoz.arita@gmail.com"
@@ -25,8 +26,7 @@ DB_PATH = os.path.join(BASE_DIR, "forest_contact.db")
 # データベースの準備
 def init_db():
     with sqlite3.connect(DB_PATH) as conn:
-        conn.execute(
-            """
+        conn.execute("""
             CREATE TABLE IF NOT EXISTS inquiries (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT,
@@ -37,8 +37,7 @@ def init_db():
                 message TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
-            """
-        )
+            """)
 
 
 # トップページ
