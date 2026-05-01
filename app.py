@@ -4,15 +4,15 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mailman import Mail, EmailMessage
 
 app = Flask(__name__)
-app.secret_key = "forest_secret_key"  # フラッシュメッセージに必要
+app.secret_key = "forest_secret_key"
 
-# --- Gmail送信設定 ---
+# --- Gmail送信設定（安定性の高いポート587を使用） ---
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USE_SSL"] = False
 app.config["MAIL_USERNAME"] = "atoz.arita@gmail.com"
-app.config["MAIL_PASSWORD"] = "fjgn kkht uoyv muaf"  # 16桁のアプリパスワード
+app.config["MAIL_PASSWORD"] = "fjgn kkht uoyv muaf"
 app.config["MAIL_DEFAULT_SENDER"] = "atoz.arita@gmail.com"
 
 mail = Mail()
@@ -23,7 +23,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "forest_contact.db")
 
 
-# データベースの準備
 def init_db():
     with sqlite3.connect(DB_PATH) as conn:
         conn.execute("""
@@ -40,13 +39,11 @@ def init_db():
             """)
 
 
-# トップページ
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-# 例：別ページ（あとで増やせる）
 @app.route("/price")
 def price():
     return render_template("price.html")
@@ -74,7 +71,6 @@ def contact():
             "message": request.form.get("message", "").strip(),
         }
 
-        # バリデーション
         if (
             not data["username"]
             or not data["furigana"]
@@ -84,8 +80,9 @@ def contact():
             flash("必須項目を入力してください。")
             return redirect(url_for("contact"))
 
+        # --- 保存と送信の処理 ---
         try:
-            # データベースに保存
+            # 1. まずデータベースに保存（メールが失敗してもデータは残るようにする）
             with sqlite3.connect(DB_PATH) as conn:
                 conn.execute(
                     """
@@ -102,11 +99,12 @@ def contact():
                     ),
                 )
 
-            # Gmail送信
-            msg = EmailMessage(
-                subject=f"【キャンプ場】お問い合わせ通知：{data['username']} 様",
-                to=["atoz.arita@gmail.com"],
-                body=f"""
+            # 2. 次にメール送信を試みる（別の try ブロックで囲む）
+            try:
+                msg = EmailMessage(
+                    subject=f"【キャンプ場】お問い合わせ：{data['username']} 様",
+                    to=["atoz.arita@gmail.com"],
+                    body=f"""
 キャンプ場のお問い合わせフォームから新しい投稿がありました。
 
 【お客様情報】
@@ -118,22 +116,26 @@ def contact():
 
 【お問い合わせ内容】
 {data['message']}
-                """,
-            )
-            msg.send()
+                    """,
+                )
+                # 送信失敗時にアプリを止めない設定
+                msg.send(fail_silently=True)
+            except Exception as mail_error:
+                # メール送信に失敗してもログを出すだけで次に進む
+                print(f"Mail sending failed: {mail_error}")
 
             flash("お問い合わせを受け付けました。ありがとうございました！")
 
         except Exception as e:
+            # データベース保存すら失敗した場合のエラー
             flash("システムエラーが発生しました。お電話にてご連絡ください。")
-            print(f"Error: {e}")
+            print(f"Critical Error: {e}")
 
         return redirect(url_for("contact"))
 
     return render_template("contact.html")
 
 
-# デバッグ用データ確認関数
 def check_db():
     if os.path.exists(DB_PATH):
         with sqlite3.connect(DB_PATH) as conn:
@@ -146,5 +148,5 @@ def check_db():
 
 
 if __name__ == "__main__":
-    init_db()  # 起動時にDBテーブルを作成
+    init_db()
     app.run(debug=True)
