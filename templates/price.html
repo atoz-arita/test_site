@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}キャンプ料金 | ふぉれすと{% endblock %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/price.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/page.css') }}">
+
+<main class="page">
+	<section class="main_img camp">
+		<h1>キャンプ料金
+			<span>campsite & price</span>
+		</h1>
+	</section>
+
+	<section class="page_content">
+		<ul class="camp">
+			<li>ご予約は　<a href="#" target="_blank">こちら <i class="fa-solid fa-arrow-up-right-from-square"></i></a>　からお願いします。
+			</li>
+		</ul>
+		<img class="">
+		<table class="price">
+			<tr>
+				<th colspan="2">
+					入場料
+				</th>
+			</tr>
+			<tr>
+				<td>
+					大人1名：<span>500円</span>
+				</td>
+				<td>
+					子ども1名：<span>200円</span>
+				</td>
+			</tr>
+		</table>
+
+		<table class="price">
+			<tr>
+				<th colspan="2">
+					キャンプサイト A～D<br>
+					大人1～2名向け
+				</th>
+			</tr>
+			<tr>
+				<td>
+					平日：<span>4,000円</span>
+				</td>
+				<td>
+					土日祝：<span>5,000円</span>
+				</td>
+			</tr>
+		</table>
+
+		<table class="price last">
+			<tr>
+				<th colspan="2">
+					キャンプサイト E～J<br>
+					大人3～6名向け
+				</th>
+			</tr>
+			<tr>
+				<td>
+					平日：<span>10,000円</span>
+				</td>
+				<td>
+					土日祝：<span>11,000円</span>
+				</td>
+			</tr>
+		</table>
+		<img src="{{ url_for('static', filename='image/price/map.webp') }}">
+	</section>
+</main>
+{% endblock %}

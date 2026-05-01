@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+    <title>{% block title %}ふぉれすと{% endblock %}</title>
+</head>
+
+<body>
+    <!-- ヘッダー固定 -->
+    <header>
+        <!-- ハンバーガーここから -->
+        <div class="container">
+            <div class="hamburger-menu">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <nav class="nav-menu">
+                <a href="/price">キャンプ料金</a>
+                <a href="/rental">レンタル品一覧</a>
+                <a href="/faq">よくあるご質問</a>
+                <a href="/contact">問い合わせ</a>
+            </nav>
+        </div>
+        <!-- ハンバーガーここまで -->
+        <!--
+        <nav>
+            <div class="site-header__reservation">
+                予約・お問い合わせは
+                <p class="site-header__tel">092-000-000</p>
+            </div> 
+            <ul class="site-header">
+                <li><a href="#">レンタル品一覧</a></li>
+                <li><a href="#">利用料</a></li>
+                <li><a href="#">キャンプ飯紹介</a></li>
+                <li><a href="#">よくあるご質問</a></li>
+            </ul>
+        </nav>
+        -->
+        <!-- header固定 -->
+    </header>
+
+    <!-- ページTOP -->
+    <div id="pagetop" hidden>
+        <img src="{{ url_for('static', filename='image/icon/car.PNG') }}">
+        <span>ページTOPへ</span>
+    </div>
+
+    <!-- ===== メイン差し込み ===== -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- ===== footer ===== -->
+    <footer class="footer">
+        <div class="reservation">
+            予約・お問い合わせは
+            <p class="tel">092-000-000</p>
+            〒XXX-XXXX<br>
+            福岡県○○市XX町1-2-3
+        </div>
+        <ul class="footer-content">
+            <li><a href="/price">キャンプ料金</a></li>
+            <li><a href="/rental">レンタル品一覧</a></li>
+            <li><a href="/faq">よくあるご質問</a></li>
+            <li><a href="/contact">問い合わせ</a></li>
+        </ul>
+        <p class="copyright">© human group 2026</p>
+
+    </footer>
+</body>
+
+</html>

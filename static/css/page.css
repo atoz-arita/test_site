@@ -1,0 +1,148 @@
+body {
+	background-image: none;
+}
+
+header img {
+	width: 100%;
+}
+
+section {
+	margin: 0;
+}
+
+section.main_img {
+	background-image: url("/static/image/price/img_header_price.webp");
+	background-size: cover;
+	background-position: center;
+	height: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	position: relative;
+}
+
+section.camp {
+	background-image: url("/static/image/price/img_header_price.webp");
+}
+
+section.contact {
+	background-image: url("/static/image/contact/img_header_contact.webp");
+}
+
+section.qa {
+	background-image: url("/static/image/faq/img_header_faq.webp");
+}
+
+.page h1 {
+	position: absolute;
+	bottom: -55px;
+	background-color: white;
+	padding: 20px 60px;
+	border-radius: 20px;
+	font-size: 48px;
+}
+
+.page h1 span {
+	font-size: 18px;
+	display: block;
+}
+
+.page_content {
+	max-width: 1000px;
+	margin: 100px auto;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+	body {
+		font-size: 16px;
+	}
+
+	.page_content {
+		width: 100%;
+		padding: 0 20px;
+		margin: 80px auto 0;
+	}
+
+	section.main_img {
+		height: 200px;
+	}
+
+	.page h1 {
+		font-size: 30px;
+		padding: 20px 40px;
+	}
+
+	.page h1 span {
+		font-size: 14px;
+	}
+
+	table.price {
+		margin-top: 40px;
+	}
+
+	table.last {
+		margin-bottom: 40px;
+	}
+
+	ul.camp {
+		margin-bottom: -20px;
+	}
+
+	.price th {
+		font-size: 20px;
+	}
+
+	.price td {
+		font-size: 16px;
+	}
+
+	.page h2 {
+		font-size: 20px;
+	}
+
+	ul.contact li {
+		line-height: 30px;
+		margin-bottom: 20px;
+	}
+
+	.contact_field {
+		padding: 20px 30px;
+	}
+
+	table.contact {
+		display: block;
+		width: 100%;
+	}
+
+	table.contact tbody,
+	table.contact tr {
+		display: block;
+		width: 100%;
+	}
+
+	table.contact th {
+		display: block;
+		width: 100%;
+		padding: 20px 0;
+		height: auto;
+	}
+
+	table.contact td {
+		display: block;
+		margin-bottom: 30px;
+	}
+
+	table.contact th::after {
+		margin-left: 20px;
+	}
+
+	table.contact td {
+		width: 100%;
+	}
+
+
+
+}

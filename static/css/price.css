@@ -1,0 +1,68 @@
+ul.camp li {
+	list-style-type: disc;
+	line-height: 40px;
+	margin-left: 30px;
+}
+
+table.price {
+	width: 100%;
+	margin-top: 60px;
+	border-collapse: separate;
+	border-spacing: 0;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+table.price:first-child {
+	margin-top: 0px;
+}
+
+table.last {
+	margin-bottom: 60px;
+}
+
+.price th {
+	font-size: 24px;
+	background-color: #90EE90;
+	text-align: left;
+}
+
+.price td {
+	font-size: 18px;
+	background-color: #E1E3E0;
+	border-right: 4px solid white;
+	border-top: 4px solid white;
+}
+
+table.price span {
+	font-weight: bold;
+	font-size: 120%;
+	color: #606060;
+}
+
+.price td:last-child {
+	border-right: none;
+}
+
+.price th,
+.price td {
+	padding: 25px;
+}
+
+.page img {
+	width: 100%;
+}
+
+ul.camp a {
+	color: #58bb58;
+	font-weight: bold;
+	position: relative;
+}
+
+ul.camp a:hover {
+	color: #90EE90;
+	cursor: pointer;
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	text-underline-offset: 4px;
+}

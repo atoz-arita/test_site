@@ -1,0 +1,140 @@
+@charset "utf-8";
+
+/***** ヘッダー *****/
+
+/***** メインセクション *****/
+html {
+    scroll-behavior: smooth;
+}
+
+.qa_main {
+    width: 100%;
+    margin: auto;
+    font-size: 20px;
+}
+
+.qa_main nav ul {
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.qa_main nav ul li {
+    display: block;
+    color: #000;
+    background-color: #90ee90;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.qa_main nav ul li:hover {
+    background-color: #10cc10;
+}
+
+.qa_main h2 {
+    width: 1000px;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 40px 10px;
+}
+
+#qa_list {
+    width: 1000px;
+    margin: auto;
+}
+
+#qa_list li {
+    margin: 25px 30px;
+    border: 2px solid #90ee90;
+    border-radius: 10px;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.button {
+    display: block;
+}
+
+#qa_list li button {
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+    padding: 15px;
+    background-color: #90ee90;
+    border-bottom: 1px solid #90ee90;
+}
+
+#qa_list li .button:hover {
+    background-color: #10cc10;
+}
+
+#qa_list li p {
+    line-height: 1.8;
+    padding: 5px;
+}
+
+#qa_list li a {
+    color: blue;
+}
+
+#qa_list li a:hover {
+    color: #fff;
+    background-color: blue;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#qa_list div p {
+    text-align: center;
+    margin: 10px;
+}
+
+#qa_list div #inquiry {
+    background-color: #eee;
+    border: 1px solid #000;
+    border-radius: 10px;
+    width: 400px;
+    padding: 5px;
+    margin: auto;
+}
+
+.list {
+    width: 100%;
+    white-space: pre-line;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.list.open {
+    background-color: #fff;
+    max-height: 400px;
+    opacity: 1;
+}
+
+.accordion {
+    position: relative;
+    padding-right: 30px;
+}
+
+.plus {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.plus::before {
+    position: absolute;
+    right: 20px;
+    content: "＋";
+}
+
+.accordion.active .plus::before {
+    content: "－";
+}

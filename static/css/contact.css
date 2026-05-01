@@ -1,0 +1,230 @@
+.page h2 {
+	font-size: 24px;
+	font-weight: bold;
+	text-align: left;
+	margin-bottom: 30px;
+}
+
+ul.contact li {
+	list-style-type: disc;
+	line-height: 40px;
+	margin-left: 30px;
+}
+
+.contact_field {
+	width: 100%;
+	background-color: #E1E3E0;
+	margin: 60px 0;
+	padding: 60px;
+	border-radius: 20px;
+}
+
+table.contact {
+	text-align: left;
+	width: 100%;
+	border-spacing: 15px;
+	border-collapse: separate;
+}
+
+table.contact th {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-right: 30px;
+	font-weight: bold;
+	height: 80px;
+}
+
+
+table.contact th::after {
+	content: "必須";
+	background-color: #8ceb93;
+	color: #fff;
+	font-size: 12px;
+	padding: 3px 12px;
+	border-radius: 20px;
+	display: inline-block;
+	line-height: 1.5;
+}
+
+table.contact th.no_required::after {
+	content: none;
+}
+
+table.contact td {
+	width: 70%;
+	vertical-align: middle;
+}
+
+table.contact input,
+table.contact textarea {
+	width: 100%;
+	background-color: #fff;
+	border-radius: 10px;
+	border: none;
+	padding: 15px;
+	box-sizing: border-box;
+	font-family: inherit;
+}
+
+table.contact textarea {
+	resize: vertical;
+	height: 150px;
+	display: block;
+}
+
+table.contact input {
+	height: 50px;
+}
+
+table.contact label span {
+	vertical-align: middle;
+	padding: 0 50px 0 10px;
+}
+
+
+
+.radio-group {
+	display: flex;
+	gap: 30px;
+}
+
+table.contact label {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+table.contact input[type="radio"] {
+	width: 18px;
+	height: 18px;
+	margin-right: 10px;
+	border: 2px solid #ccc;
+	appearance: none;
+	-webkit-appearance: none;
+	background-color: #fff;
+	border-radius: 50%;
+	position: relative;
+}
+
+table.contact input[type="radio"]:checked {
+	background-color: #8ceb93;
+}
+
+table.contact th.textarea {
+	align-items: flex-start;
+	vertical-align: top;
+	padding-top: 13px;
+}
+
+table.contact th.optional::after {
+	content: "任意";
+	background-color: #ccc;
+}
+
+.privacy_policy {
+	background-color: #fff;
+	padding: 30px;
+	border-radius: 10px;
+	margin-top: 40px;
+}
+
+.privacy_policy h3 {
+	font-size: 16px;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.policy_box {
+	height: 150px;
+	overflow-y: scroll;
+	border: 1px solid #ddd;
+	padding: 20px;
+	font-size: 14px;
+	line-height: 1.8;
+	color: #666;
+	font-weight: bold;
+}
+
+.policy_box ol {
+	padding-left: 1.5em;
+}
+
+.policy_box li {
+	margin-bottom: 10px;
+}
+
+.confirm_area {
+	margin: 40px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+}
+
+.checkbox_label {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.checkbox_label input[type="checkbox"] {
+	width: 24px;
+	height: 24px;
+	margin-right: 12px;
+	accent-color: #8ceb93;
+	cursor: pointer;
+}
+
+.submit_area {
+	text-align: center;
+}
+
+.submit_btn {
+	background-color: #222;
+	color: #fff;
+	padding: 20px 80px;
+	border: none;
+	border-radius: 50px;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	transition: background-color 0.5s ease;
+}
+
+.submit_btn:hover {
+	background-color: #8ceb93;
+	color: #535353;
+}
+
+.submit_btn .arrow {
+	margin-left: 20px;
+	font-size: 22px;
+}
+
+.policy_box ul {
+	list-style: disc;
+	padding-left: 20px;
+}
+
+.policy_box ol {
+	list-style: decimal;
+
+}
+
+ul.contact a {
+	color: #58bb58;
+	font-weight: bold;
+	position: relative;
+}
+
+ul.contact a:hover {
+	color: #90EE90;
+	cursor: pointer;
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	text-underline-offset: 4px;
+}

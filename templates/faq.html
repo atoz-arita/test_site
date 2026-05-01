@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}よくある質問 | ふぉれすと{% endblock %}
+
+{% block content %}
+<!-- CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/faq.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/page.css') }}">
+
+<!-- JS -->
+<script src="{{ url_for('static', filename='js/faq.js') }}" defer></script>
+
+
+<main class="page qa_main">
+    <section class="main_img qa">
+        <h1>よくある質問
+            <span>question & answer</span>
+        </h1>
+    </section>
+
+    <section class="page_content">
+        <nav>
+            <ul>
+                <li><a href="#site">サイト・施設について</a></li>
+                <li><a href="#reservation">予約・チェックインについて</a></li>
+                <li><a href="#service">サービス・利用ルールについて</a></li>
+            </ul>
+        </nav>
+        <section id="qa_list">
+            <h2 id="site">サイト・施設について</h2>
+            <ul id="faq-list1"></ul>
+            <h2 id="reservation">予約・チェックインについて</h2>
+            <ul id="faq-list2"></ul>
+            <h2 id="service">サービス・利用ルールについて</h2>
+            <ul id="faq-list3"></ul>
+            <div>
+                <p>その他ご不明な点がございましたら、お気軽にお問い合わせください。</p>
+                <p id="inquiry"><a href="#">お問い合わせ先はこちらをクリック</a></p>
+            </div>
+        </section>
+    </section>
+</main>
+{% endblock %}

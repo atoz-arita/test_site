@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section>
+
+    <!-- <section class="hero"> -->
+    <div class="hero-text">
+        <h1 class="typing">日常を、ちょっとだけ外へ。</h1>
+        <!-- <p>ここで過ごす時間が、思い出になる。</p> -->
+    </div>
+    <div class="transration">
+        <div class="slidshow">
+            <img class="slidshow-img" src="{{ url_for('static', filename='image/top/image01.png') }}">
+            <img class="slidshow-img" src="{{ url_for('static', filename='image/top/image02.png') }}">
+            <img class="slidshow-img" src="{{ url_for('static', filename='image/top/image03.png') }}">
+        </div>
+    </div>
+</section>
+<!-- ここまで -->
+<!-- お知らせここから -->
+<section>
+    <ul class="news-list">
+        <li class="item">
+            <a href="#">
+                <p class="date">2026/4/15</p>
+                <p class="news"><span>お知らせ</span></p>
+                <p class="title">ここにお知らせが入ります</p>
+            </a>
+        </li>
+        <li class="item">
+            <a href="#">
+                <p class="date">2026/4/15</p>
+                <p class="news"><span>お知らせ</span></p>
+                <p class="title">ここにお知らせが入ります</p>
+            </a>
+        </li>
+        <li class="item">
+            <a href="#">
+                <p class="date">2026/4/15</p>
+                <p class="news"><span>お知らせ</span></p>
+                <p class="title">ここにお知らせが入ります</p>
+            </a>
+        </li>
+    </ul>
+</section>
+<!-- お知らせここまで -->
+
+
+<!-- 施設紹介ここから -->
+<section>
+    <div class="category-area">
+        <!-- カテゴリー1 -->
+        <a href="#" class="category category-price">
+            <div class="category-text">
+                <h2>Campsites & Pricing</h2>
+                <p>キャンプサイト・料金</p>
+            </div>
+        </a>
+        <!-- カテゴリー2 -->
+        <a href="#" class="category category-rental">
+            <div class="category-text">
+                <h2>Rental & Shop</h2>
+                <p>レンタル・売店</p>
+            </div>
+        </a>
+        <!-- カテゴリー3 -->
+        <a href="#" class="category category-food">
+            <div class="category-text">
+                <h2>Food</h2>
+                <p>キャンプ飯紹介（仮）</p>
+            </div>
+        </a>
+        <!-- カテゴリー4 -->
+        <a href="#" class="category category-qa">
+            <div class="category-text">
+                <h2>FAQ</h2>
+                <p>よくあるご質問</p>
+            </div>
+        </a>
+    </div>
+</section>
+<!-- キャンプ場のコンセプトここから -->
+<section>
+    <div class="concept">
+        <h1>はじめてのキャンプ。<br>安心安全に、手ぶらで。</h1>
+        <p>大好きなあの人と過ごしますか？</p>
+        <p>大切なひとりの時間を過ごしますか？</p>
+        <p>ふぉれすとは、はじめての方でも安心して、</p>
+        <p>快適なアウトドアの時間をお楽しみいただくためのキャンプ場です。</p>
+        <p>「テント張りを手伝ってほしい」「キャンプグッズの使い方がわからない」など、</p>
+        <p>あなたの困りごとを、２４時間常駐スタッフが、つかず離れずサポートします。</p>
+        <p>初心者にやさしい施設設備とキャンプサイト区割り、</p>
+        <p>かんたんに使えるキャンプグッズ（レンタル用品）などを取り揃え、</p>
+        <p>あなたのお越しをお待ちしております。</p>
+        <p>どうぞ、手ぶらでお越しください。</p>
+    </div>
+</section>
+<!-- キャンプ場のコンセプトここまで -->
+<br>
+<!-- マップここから -->
+
+<section class="access">
+    <div class="access-text">
+        <h2>Access</h2>
+        <p>福岡市から車で〇分</p>
+
+
+    </div>
+    <div class="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d26589.66583954148!2d130.53964630028605!3d33.58692404233379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sja!2sjp!4v1776924055080!5m2!1sja!2sjp"
+            width="520" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>
+
+<!-- マップここまで -->
+
+
+<!-- </section> -->
+{% endblock %}

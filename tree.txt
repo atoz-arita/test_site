@@ -1,0 +1,15 @@
+フォルダー パスの一覧:  ボリューム Windows
+ボリューム シリアル番号は 5A14-B67E です
+C:.
+├─static
+│  ├─css
+│  ├─image
+│  │  ├─category
+│  │  ├─contact
+│  │  ├─faq
+│  │  ├─footer
+│  │  ├─icon
+│  │  ├─price
+│  │  └─top
+│  └─js
+└─templates
