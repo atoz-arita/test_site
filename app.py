@@ -119,7 +119,7 @@ def contact():
                     """,
                 )
                 # 送信失敗時にアプリを止めない設定
-                msg.send(fail_silently=True)
+                # msg.send(fail_silently=True)
             except Exception as mail_error:
                 # メール送信に失敗してもログを出すだけで次に進む
                 print(f"Mail sending failed: {mail_error}")
