@@ -1,20 +1,23 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_mail import Mail, Message
+import os
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key_here"  # フラッシュメッセージ用に必要
+# flashメッセージを表示するために必要なシークレットキー
+app.secret_key = "your_secret_key_here"
 
-# --- メール送信設定 (例: Gmailを使用する場合) ---
+# --- メール送信設定 (Gmailを使用する場合の例) ---
+# セキュリティのため、本来は環境変数などでの管理が推奨されます
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
-app.config["MAIL_USERNAME"] = "MAIL_PASSWORD"
-app.config["MAIL_PASSWORD"] = "MAIL_USERNAME"
-app.config["MAIL_DEFAULT_SENDER"] = "MAIL_PASSWORD"
+app.config["MAIL_USERNAME"] = "atoz.arita@gmail.com"
+app.config["MAIL_PASSWORD"] = "fjgn kkht uoyv muaf"
+app.config["MAIL_DEFAULT_SENDER"] = "atoz.arita@gmail.com"
 
 mail = Mail(app)
 
-# --- ルーティング設定 ---
+# --- ルーティング ---
 
 
 @app.route("/")
@@ -27,11 +30,6 @@ def price():
     return render_template("price.html")
 
 
-@app.route("/rental")
-def rental():
-    return "レンタル品一覧ページ"
-
-
 @app.route("/faq")
 def faq():
     return render_template("faq.html")
@@ -40,40 +38,46 @@ def faq():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        # フォームデータの取得
+        # フォームから送られてきたデータを取得
+        # contact.htmlの各inputタグの 'name' 属性と一致させる必要があります
         username = request.form.get("username")
         furigana = request.form.get("furigana")
         email = request.form.get("email")
         tel = request.form.get("tel")
-        method = request.form.get("contact_method")
-        body = request.form.get("message")
+        contact_method = request.form.get("contact_method")
+        message_body = request.form.get("message")
 
+        # 管理者へ届くメールの内容を作成
         msg = Message(
-            subject=f"【フォレスト】{username}様よりお問い合わせ",
-            recipients=["MAIL_PASSWORD"],
+            subject=f"【お問い合わせ】{username}様より",
+            recipients=["atoz.arita@gmail.com"],  # 通知を受け取りたいメールアドレス
         )
         msg.body = f"""
-        お問い合わせがありました。
+        Webサイトからお問い合わせがありました。
 
         【お名前】: {username} ({furigana})
         【メール】: {email}
         【電話番号】: {tel}
-        【希望連絡方法】: {method}
+        【希望連絡方法】: {contact_method}
         【内容】:
-        {body}
+        {message_body}
         """
 
         try:
+            # メールの送信実行
             mail.send(msg)
-            flash("お問い合わせを受け付けました。自動返信メールをご確認ください。")
+            flash("お問い合わせを受け付けました。ありがとうございます。")
+            # 送信成功後、お問い合わせページにリダイレクト（再読み込み対策）
+            return redirect(url_for("contact"))
         except Exception as e:
-            flash("エラーが発生しました。時間をおいて再度お試しください。")
             print(f"Mail Error: {e}")
+            flash("メール送信中にエラーが発生しました。設定を確認してください。")
+            return redirect(url_for("contact"))
 
-        return redirect(url_for("contact"))
-
+    # GETリクエスト（ページ表示時）
     return render_template("contact.html")
 
 
 if __name__ == "__main__":
+    # debug=True にするとコードを変更した際に自動でサーバーが再起動します
     app.run(debug=True)
