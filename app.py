@@ -1,22 +1,20 @@
-import os
-from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_mailman import Mail, EmailMessage
+from flask import Flask, render_template, request, flash, redirect, url_for
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
-app.secret_key = "forest_secret_key"
+app.secret_key = "your_secret_key_here"  # フラッシュメッセージ用に必要
 
-# --- Gmail送信設定 ---
+# --- メール送信設定 (例: Gmailを使用する場合) ---
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 465
-app.config["MAIL_USE_TLS"] = False
-app.config["MAIL_USE_SSL"] = True
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = "atoz.arita@gmail.com"
+app.config["MAIL_PASSWORD"] = "fjgn kkht uoyv muaf"
+app.config["MAIL_DEFAULT_SENDER"] = "atoz.arita@gmail.com"
 
-app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME", "atoz.arita@gmail.com")
-app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
-app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_USERNAME")
+mail = Mail(app)
 
-mail = Mail()
-mail.init_app(app)
+# --- ルーティング設定 ---
 
 
 @app.route("/")
@@ -31,7 +29,7 @@ def price():
 
 @app.route("/rental")
 def rental():
-    return render_template("rental.html")
+    return "レンタル品一覧ページ"
 
 
 @app.route("/faq")
@@ -42,52 +40,35 @@ def faq():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        data = {
-            "username": request.form.get("username", "").strip(),
-            "furigana": request.form.get("furigana", "").strip(),
-            "email": request.form.get("email", "").strip(),
-            "tel": request.form.get("tel", "").strip(),
-            "method": request.form.get("contact_method"),
-            "message": request.form.get("message", "").strip(),
-        }
+        # フォームデータの取得
+        username = request.form.get("username")
+        furigana = request.form.get("furigana")
+        email = request.form.get("email")
+        tel = request.form.get("tel")
+        method = request.form.get("contact_method")
+        body = request.form.get("message")
 
-        # バリデーション
-        if (
-            not data["username"]
-            or not data["furigana"]
-            or not data["email"]
-            or not data["method"]
-        ):
-            flash("必須項目を入力してください。")
-            return redirect(url_for("contact"))
+        msg = Message(
+            subject=f"【フォレスト】{username}様よりお問い合わせ",
+            recipients=["atoz.arita@gmail.com"],  # 管理者の受信希望アドレス
+        )
+        msg.body = f"""
+        お問い合わせがありました。
+
+        【お名前】: {username} ({furigana})
+        【メール】: {email}
+        【電話番号】: {tel}
+        【希望連絡方法】: {method}
+        【内容】:
+        {body}
+        """
 
         try:
-            msg = EmailMessage(
-                subject=f"【キャンプ場】お問い合わせ：{data['username']} 様",
-                to=["atoz.arita@gmail.com"],
-                body=f"""
-キャンプ場のお問い合わせフォームから新しい投稿がありました。
-
-【お客様情報】
-お名前: {data['username']}
-ふりがな: {data['furigana']}
-メールアドレス: {data['email']}
-電話番号: {data['tel']}
-希望連絡方法: {data['method']}
-
-【お問い合わせ内容】
-{data['message']}
-								""",
-            )
-            # fail_silently=False にすることで、エラー時に except ブロックへ飛ばします
-            msg.send(fail_silently=False)
-            flash("お問い合わせを受け付けました。ありがとうございました！")
-
+            mail.send(msg)
+            flash("お問い合わせを受け付けました。自動返信メールをご確認ください。")
         except Exception as e:
-            print(f"Mail sending failed: {e}")
-            flash(
-                "メール送信中にエラーが発生しました。お手数ですが、お電話にてご連絡ください。"
-            )
+            flash("エラーが発生しました。時間をおいて再度お試しください。")
+            print(f"Mail Error: {e}")
 
         return redirect(url_for("contact"))
 
